@@ -1,0 +1,2275 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#edf5f2">
+  <title>连小理·引桥｜本科生的情绪支持与沟通演练</title>
+  <style>
+    :root {
+      --paper: #edf5f2;
+      --surface: #fffdfa;
+      --white: #ffffff;
+      --ink: #203332;
+      --ink-soft: #526b68;
+      --muted: #7e918e;
+      --line: #d7e4e0;
+      --teal: #397f74;
+      --teal-soft: #e0f1ec;
+      --coral: #e26e5c;
+      --coral-soft: #fbe6e0;
+      --blue: #567fad;
+      --blue-soft: #e6eef8;
+      --gold: #d7a945;
+      --gold-soft: #fbefce;
+      --shadow: 0 18px 48px rgba(55, 91, 84, 0.12);
+      --serif: "Noto Serif SC", "STSong", "SimSun", serif;
+      --sans: "Noto Sans SC", "Microsoft YaHei", "DengXian", sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      min-height: 100%;
+      background: var(--paper);
+    }
+
+    body {
+      min-height: 100vh;
+      margin: 0;
+      color: var(--ink);
+      font-family: var(--sans);
+      background-color: var(--paper);
+      background-image: radial-gradient(rgba(57, 127, 116, 0.1) 0.8px, transparent 0.8px);
+      background-size: 18px 18px;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    button,
+    input,
+    textarea,
+    select {
+      font: inherit;
+    }
+
+    button {
+      color: inherit;
+      cursor: pointer;
+    }
+
+    button:focus-visible,
+    input:focus-visible,
+    textarea:focus-visible,
+    select:focus-visible {
+      outline: 3px solid rgba(86, 127, 173, 0.32);
+      outline-offset: 2px;
+    }
+
+    .shell {
+      width: min(1280px, calc(100% - 28px));
+      margin: 16px auto 34px;
+    }
+
+    .topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      padding: 13px 17px;
+      background: rgba(255, 255, 255, 0.82);
+      border: 1px solid rgba(215, 228, 224, 0.96);
+      border-radius: 12px;
+      box-shadow: 0 10px 30px rgba(55, 91, 84, 0.08);
+      backdrop-filter: blur(14px);
+      animation: reveal 520ms ease both;
+    }
+
+    .brand {
+      display: flex;
+      min-width: 0;
+      align-items: center;
+      gap: 11px;
+    }
+
+    .brand-mark {
+      position: relative;
+      display: inline-grid;
+      width: 39px;
+      height: 31px;
+      flex: 0 0 auto;
+    }
+
+    .brand-mark::before,
+    .brand-mark::after {
+      position: absolute;
+      bottom: 4px;
+      width: 24px;
+      height: 18px;
+      content: "";
+      border: 2.5px solid var(--teal);
+      border-bottom: 0;
+      border-radius: 50% 50% 0 0;
+    }
+
+    .brand-mark::before {
+      left: 0;
+      border-right: 0;
+    }
+
+    .brand-mark::after {
+      right: 0;
+      border-left: 0;
+    }
+
+    .brand-title {
+      margin: 0;
+      font-family: var(--serif);
+      font-size: 21px;
+      line-height: 1;
+    }
+
+    .brand-sub {
+      margin-top: 4px;
+      color: var(--muted);
+      font-size: 10.5px;
+      line-height: 1.35;
+    }
+
+    .top-actions {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    .demo-pill {
+      display: inline-flex;
+      min-height: 34px;
+      padding: 0 12px;
+      align-items: center;
+      color: #4d7770;
+      font-size: 11px;
+      font-weight: 750;
+      background: var(--teal-soft);
+      border-radius: 999px;
+    }
+
+    .primary-button,
+    .ghost-button,
+    .soft-button,
+    .danger-button,
+    .chip,
+    .icon-button,
+    .mode-card,
+    .scenario-card {
+      border: 0;
+      transition:
+        transform 160ms ease,
+        background-color 160ms ease,
+        border-color 160ms ease,
+        color 160ms ease,
+        box-shadow 160ms ease;
+    }
+
+    .primary-button,
+    .ghost-button,
+    .soft-button,
+    .danger-button {
+      display: inline-flex;
+      min-height: 42px;
+      padding: 0 15px;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      font-size: 12.5px;
+      font-weight: 780;
+      border-radius: 999px;
+    }
+
+    .primary-button {
+      color: #fff;
+      background: var(--coral);
+      box-shadow: 0 8px 20px rgba(226, 110, 92, 0.2);
+    }
+
+    .primary-button.teal {
+      background: var(--teal);
+      box-shadow: 0 8px 20px rgba(57, 127, 116, 0.2);
+    }
+
+    .primary-button.blue {
+      background: var(--blue);
+      box-shadow: 0 8px 20px rgba(86, 127, 173, 0.18);
+    }
+
+    .ghost-button,
+    .soft-button {
+      color: var(--ink-soft);
+      background: #f7faf9;
+      border: 1px solid var(--line);
+    }
+
+    .danger-button {
+      color: #fff;
+      background: #315f59;
+    }
+
+    .primary-button:hover,
+    .ghost-button:hover,
+    .soft-button:hover,
+    .danger-button:hover,
+    .chip:hover {
+      transform: translateY(-2px);
+    }
+
+    .btn-icon {
+      display: block;
+      width: 17px;
+      height: 17px;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 1.9;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .layout {
+      display: grid;
+      grid-template-columns: 220px minmax(0, 1fr) 236px;
+      gap: 16px;
+      margin-top: 16px;
+      align-items: start;
+    }
+
+    .rail,
+    .notes {
+      position: sticky;
+      top: 16px;
+      padding: 17px;
+      background: rgba(255, 255, 255, 0.8);
+      border: 1px solid rgba(215, 228, 224, 0.94);
+      border-radius: 12px;
+      box-shadow: 0 12px 32px rgba(55, 91, 84, 0.07);
+      animation: reveal 620ms 80ms ease both;
+    }
+
+    .eyebrow {
+      margin: 0 0 8px;
+      color: #d06351;
+      font-size: 10.5px;
+      font-weight: 850;
+      letter-spacing: 0.08em;
+    }
+
+    .rail-title,
+    .note-title {
+      margin: 0;
+      font-family: var(--serif);
+      font-size: 16px;
+      line-height: 1.55;
+    }
+
+    .rail-copy,
+    .note-copy {
+      margin: 8px 0 0;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.7;
+    }
+
+    .progress {
+      display: grid;
+      gap: 5px;
+      margin: 17px 0 0;
+      padding: 0;
+      list-style: none;
+      counter-reset: progress;
+    }
+
+    .progress li {
+      display: grid;
+      grid-template-columns: 26px minmax(0, 1fr);
+      gap: 8px;
+      align-items: center;
+      min-height: 39px;
+      color: #80928f;
+      font-size: 12px;
+      border-top: 1px solid rgba(215, 228, 224, 0.72);
+    }
+
+    .progress li::before {
+      display: grid;
+      width: 23px;
+      height: 23px;
+      place-items: center;
+      content: counter(progress);
+      counter-increment: progress;
+      color: #69827e;
+      font-size: 10px;
+      font-weight: 850;
+      background: #edf5f2;
+      border-radius: 50%;
+    }
+
+    .progress li.active {
+      color: #315e57;
+      font-weight: 780;
+    }
+
+    .progress li.active::before {
+      color: #fff;
+      background: var(--teal);
+    }
+
+    .rail-actions {
+      display: grid;
+      gap: 8px;
+      margin-top: 17px;
+      padding-top: 14px;
+      border-top: 1px solid var(--line);
+    }
+
+    .app {
+      min-height: 760px;
+      overflow: hidden;
+      background: var(--surface);
+      border: 1px solid rgba(197, 215, 209, 0.94);
+      border-radius: 14px;
+      box-shadow: var(--shadow);
+      animation: reveal 680ms 120ms ease both;
+    }
+
+    .app::before {
+      display: block;
+      height: 6px;
+      content: "";
+      background: linear-gradient(
+        90deg,
+        #f0a294 0 25%,
+        #efd18d 25% 50%,
+        #89c4b6 50% 75%,
+        #9ab9dd 75% 100%
+      );
+    }
+
+    .app-head {
+      display: flex;
+      min-height: 74px;
+      padding: 17px 22px 14px;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      background: #fffaf5;
+      border-bottom: 1px solid #e5ece9;
+    }
+
+    .app-kicker {
+      margin: 0 0 4px;
+      color: var(--teal);
+      font-size: 10.5px;
+      font-weight: 850;
+    }
+
+    .app-title {
+      margin: 0;
+      font-family: var(--serif);
+      font-size: 20px;
+      line-height: 1.3;
+    }
+
+    .context-pill {
+      flex: 0 0 auto;
+      padding: 7px 11px;
+      color: #57726e;
+      font-size: 11px;
+      font-weight: 760;
+      background: #edf7f4;
+      border-radius: 999px;
+    }
+
+    .screen {
+      padding: 26px;
+      animation: screenIn 320ms ease both;
+    }
+
+    .home-intro {
+      position: relative;
+      max-width: 690px;
+      margin-bottom: 23px;
+    }
+
+    .home-intro::after {
+      position: absolute;
+      right: -160px;
+      bottom: 0;
+      width: 150px;
+      height: 1px;
+      content: "";
+      background: var(--line);
+      transform: rotate(-18deg);
+      transform-origin: left;
+    }
+
+    .home-title {
+      max-width: 640px;
+      margin: 0;
+      font-family: var(--serif);
+      font-size: clamp(31px, 4vw, 42px);
+      line-height: 1.2;
+    }
+
+    .home-title strong {
+      color: var(--coral);
+      font-weight: inherit;
+    }
+
+    .home-copy {
+      max-width: 620px;
+      margin: 12px 0 0;
+      color: var(--ink-soft);
+      font-size: 14px;
+      line-height: 1.8;
+    }
+
+    .data-note {
+      display: inline-flex;
+      margin-top: 13px;
+      padding: 7px 11px;
+      color: #5c746f;
+      font-size: 11px;
+      line-height: 1.5;
+      background: #f4f9f7;
+      border-left: 3px solid #82b8ad;
+      border-radius: 0 7px 7px 0;
+    }
+
+    .scenario-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .scenario-card {
+      position: relative;
+      display: flex;
+      min-height: 176px;
+      padding: 17px;
+      flex-direction: column;
+      align-items: flex-start;
+      text-align: left;
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 9px;
+      box-shadow: 0 8px 22px rgba(55, 91, 84, 0.05);
+      overflow: hidden;
+    }
+
+    .scenario-card:hover {
+      transform: translateY(-4px);
+      border-color: #9fc9c0;
+      box-shadow: 0 16px 30px rgba(55, 91, 84, 0.11);
+    }
+
+    .scenario-card::after {
+      position: absolute;
+      right: -24px;
+      bottom: -30px;
+      width: 100px;
+      height: 100px;
+      content: "";
+      border: 15px solid rgba(57, 127, 116, 0.055);
+      border-radius: 50%;
+    }
+
+    .scenario-card:nth-child(1) {
+      background: #fff6f2;
+    }
+
+    .scenario-card:nth-child(2) {
+      background: #eef9f5;
+    }
+
+    .scenario-card:nth-child(3) {
+      background: #eef4fb;
+    }
+
+    .scenario-card:nth-child(4) {
+      background: #fff9e9;
+    }
+
+    .scenario-card:nth-child(5) {
+      background: #f6f3fa;
+    }
+
+    .scenario-icon {
+      display: grid;
+      width: 41px;
+      height: 41px;
+      margin-bottom: 15px;
+      place-items: center;
+      color: var(--teal);
+      background: rgba(255, 255, 255, 0.82);
+      border-radius: 50%;
+      box-shadow: 0 7px 16px rgba(55, 91, 84, 0.08);
+    }
+
+    .scenario-icon svg {
+      width: 21px;
+      height: 21px;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 1.8;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .scenario-card:nth-child(1) .scenario-icon,
+    .scenario-card:nth-child(4) .scenario-icon {
+      color: #cf6958;
+    }
+
+    .scenario-card:nth-child(3) .scenario-icon {
+      color: var(--blue);
+    }
+
+    .scenario-label {
+      margin: 0;
+      font-family: var(--serif);
+      font-size: 19px;
+    }
+
+    .scenario-copy {
+      margin: 8px 0 0;
+      color: #667a77;
+      font-size: 12px;
+      line-height: 1.7;
+    }
+
+    .scenario-tag {
+      margin-top: auto;
+      padding-top: 14px;
+      color: #6e8581;
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: 0.05em;
+    }
+
+    .mode-head {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 18px;
+      margin-bottom: 20px;
+    }
+
+    .mode-title,
+    .page-title {
+      margin: 0;
+      font-family: var(--serif);
+      font-size: 28px;
+      line-height: 1.3;
+    }
+
+    .mode-copy,
+    .page-copy {
+      max-width: 660px;
+      margin: 8px 0 0;
+      color: var(--ink-soft);
+      font-size: 13px;
+      line-height: 1.75;
+    }
+
+    .mode-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .mode-card {
+      min-height: 228px;
+      padding: 18px;
+      text-align: left;
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 9px;
+      box-shadow: 0 8px 22px rgba(55, 91, 84, 0.05);
+    }
+
+    .mode-card:hover {
+      transform: translateY(-4px);
+      border-color: #a9cec6;
+      box-shadow: 0 16px 30px rgba(55, 91, 84, 0.11);
+    }
+
+    .mode-card:nth-child(1) {
+      background: #fff3ef;
+    }
+
+    .mode-card:nth-child(2) {
+      background: #eaf8f3;
+    }
+
+    .mode-card:nth-child(3) {
+      background: #edf4fc;
+    }
+
+    .mode-number {
+      color: #718783;
+      font-size: 10px;
+      font-weight: 850;
+      letter-spacing: 0.08em;
+    }
+
+    .mode-name {
+      margin: 28px 0 9px;
+      font-family: var(--serif);
+      font-size: 23px;
+    }
+
+    .mode-text {
+      margin: 0;
+      color: #667a77;
+      font-size: 12px;
+      line-height: 1.72;
+    }
+
+    .mode-link {
+      display: inline-flex;
+      margin-top: 23px;
+      align-items: center;
+      gap: 7px;
+      color: #356e66;
+      font-size: 11px;
+      font-weight: 800;
+    }
+
+    .mode-link svg {
+      width: 15px;
+      height: 15px;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .back-link {
+      display: inline-flex;
+      min-height: 34px;
+      padding: 0 10px;
+      align-items: center;
+      gap: 6px;
+      color: #627b77;
+      font-size: 11px;
+      font-weight: 760;
+      background: #f6faf9;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+    }
+
+    .back-link svg {
+      width: 14px;
+      height: 14px;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .chat {
+      display: grid;
+      gap: 12px;
+      max-width: 800px;
+      margin-top: 18px;
+    }
+
+    .bubble {
+      max-width: 85%;
+      padding: 14px 16px;
+      font-size: 13px;
+      line-height: 1.74;
+      border-radius: 14px;
+      box-shadow: 0 7px 18px rgba(55, 91, 84, 0.05);
+    }
+
+    .bubble.user {
+      justify-self: end;
+      color: #fff;
+      background: var(--teal);
+      border-bottom-right-radius: 4px;
+    }
+
+    .bubble.agent {
+      justify-self: start;
+      background: #fff;
+      border: 1px solid var(--line);
+      border-bottom-left-radius: 4px;
+    }
+
+    .chat-compose {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 9px;
+      max-width: 800px;
+      margin-top: 14px;
+    }
+
+    .chat-compose input {
+      width: 100%;
+      min-height: 44px;
+      padding: 0 14px;
+      color: var(--ink);
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+    }
+
+    .quick-row {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-top: 13px;
+    }
+
+    .chip {
+      min-height: 36px;
+      padding: 0 12px;
+      color: #5d7773;
+      font-size: 11px;
+      font-weight: 760;
+      background: #f4f9f7;
+      border: 1px solid transparent;
+      border-radius: 999px;
+    }
+
+    .chip.active {
+      color: #326d64;
+      background: var(--teal-soft);
+      border-color: #b9dcd4;
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 11px;
+      margin-top: 17px;
+    }
+
+    .field {
+      display: grid;
+      gap: 7px;
+      padding: 14px;
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 9px;
+    }
+
+    .field label {
+      color: #728985;
+      font-size: 10px;
+      font-weight: 850;
+      letter-spacing: 0.06em;
+    }
+
+    .field textarea,
+    .field input {
+      width: 100%;
+      min-height: 72px;
+      padding: 10px;
+      color: var(--ink);
+      line-height: 1.65;
+      resize: vertical;
+      background: #fbfdfc;
+      border: 1px solid #e1ebe8;
+      border-radius: 7px;
+    }
+
+    .draft-list {
+      display: grid;
+      gap: 9px;
+      margin-top: 16px;
+    }
+
+    .draft {
+      width: 100%;
+      padding: 13px 14px;
+      color: #334a47;
+      font-size: 12.5px;
+      line-height: 1.7;
+      text-align: left;
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 9px;
+    }
+
+    .draft.active {
+      border-color: #e18c7d;
+      box-shadow: inset 4px 0 0 #e18c7d;
+    }
+
+    .draft-tag {
+      display: block;
+      margin-bottom: 6px;
+      color: #7e918d;
+      font-size: 9px;
+      font-weight: 850;
+      letter-spacing: 0.08em;
+    }
+
+    .tone-panel {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 10px;
+      margin-top: 15px;
+    }
+
+    .tone-field {
+      padding: 12px;
+      background: #f4faf8;
+      border: 1px solid var(--line);
+      border-radius: 9px;
+    }
+
+    .tone-field label {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      color: #607975;
+      font-size: 11px;
+      font-weight: 780;
+    }
+
+    input[type="range"] {
+      width: 100%;
+      margin-top: 9px;
+      accent-color: var(--coral);
+    }
+
+    .result-block {
+      margin-top: 17px;
+      padding: 16px;
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 9px;
+    }
+
+    .result-block h3,
+    .connect-panel h3 {
+      margin: 0 0 7px;
+      font-family: var(--serif);
+      font-size: 18px;
+    }
+
+    .result-block p,
+    .connect-panel p {
+      margin: 0;
+      color: #657b77;
+      font-size: 12px;
+      line-height: 1.72;
+    }
+
+    .role-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 8px;
+      margin-top: 11px;
+    }
+
+    .role-card {
+      min-height: 66px;
+      padding: 10px;
+      color: #667d79;
+      text-align: left;
+      background: #f8fbfa;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+    }
+
+    .role-card.active {
+      color: #315e58;
+      background: var(--teal-soft);
+      border-color: #a8cec6;
+    }
+
+    .role-card strong {
+      display: block;
+      margin-bottom: 5px;
+      font-family: var(--serif);
+      font-size: 14px;
+    }
+
+    .role-card span {
+      display: block;
+      font-size: 10px;
+      line-height: 1.45;
+    }
+
+    .action-card {
+      margin-top: 17px;
+      padding: 17px;
+      background: #f3faf7;
+      border: 1px dashed #96c4bb;
+      border-radius: 9px;
+    }
+
+    .action-card textarea {
+      width: 100%;
+      min-height: 110px;
+      margin-top: 10px;
+      padding: 12px;
+      color: #304a46;
+      line-height: 1.7;
+      resize: vertical;
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+    }
+
+    .connect-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 0.92fr) minmax(0, 1.08fr);
+      gap: 14px;
+      margin-top: 17px;
+    }
+
+    .connect-panel {
+      padding: 16px;
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 9px;
+    }
+
+    .consent {
+      display: grid;
+      grid-template-columns: 18px minmax(0, 1fr);
+      gap: 8px;
+      margin-top: 11px;
+      color: #697e7a;
+      font-size: 11px;
+      line-height: 1.55;
+    }
+
+    .consent input {
+      width: 16px;
+      height: 16px;
+      margin: 1px 0 0;
+      accent-color: var(--teal);
+    }
+
+    .invite-card {
+      min-height: 260px;
+      padding: 18px;
+      background: #f5faff;
+      border: 1px dashed #b7cbe0;
+      border-radius: 9px;
+    }
+
+    .invite-card.empty {
+      display: grid;
+      place-items: center;
+      color: #7e918e;
+      text-align: center;
+    }
+
+    .invite-label {
+      color: var(--blue);
+      font-size: 10px;
+      font-weight: 850;
+      letter-spacing: 0.09em;
+    }
+
+    .invite-card h3 {
+      margin: 12px 0 8px;
+      font-family: var(--serif);
+      font-size: 22px;
+    }
+
+    .invite-card p {
+      color: #667d79;
+      font-size: 12px;
+      line-height: 1.72;
+    }
+
+    .privacy-stamp {
+      display: inline-flex;
+      margin-top: 13px;
+      padding: 6px 9px;
+      color: #3d7b71;
+      font-size: 10px;
+      font-weight: 800;
+      background: #e2f3ee;
+      border-radius: 5px;
+    }
+
+    .note-block {
+      padding: 13px;
+      color: #5e7571;
+      font-size: 11px;
+      line-height: 1.7;
+      background: #f5f9f8;
+      border-left: 3px solid #85b9af;
+      border-radius: 0 8px 8px 0;
+    }
+
+    .note-block + .note-block {
+      margin-top: 10px;
+    }
+
+    .note-block.warm {
+      background: #fff6e8;
+      border-left-color: #dfb65b;
+    }
+
+    .modal-backdrop {
+      position: fixed;
+      z-index: 50;
+      inset: 0;
+      display: grid;
+      padding: 18px;
+      place-items: center;
+      background: rgba(31, 53, 50, 0.58);
+      backdrop-filter: blur(6px);
+      animation: fadeIn 180ms ease both;
+    }
+
+    .modal {
+      width: min(610px, 100%);
+      max-height: calc(100vh - 36px);
+      overflow: auto;
+      padding: 21px;
+      background: var(--surface);
+      border: 1px solid #d7e4e0;
+      border-radius: 14px;
+      box-shadow: 0 24px 70px rgba(24, 53, 48, 0.28);
+      animation: modalIn 220ms ease both;
+    }
+
+    .modal h2 {
+      margin: 0;
+      font-family: var(--serif);
+      font-size: 25px;
+    }
+
+    .modal p,
+    .modal li {
+      color: #5e7571;
+      font-size: 13px;
+      line-height: 1.72;
+    }
+
+    .modal ul {
+      display: grid;
+      gap: 8px;
+      margin: 14px 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .modal li {
+      padding: 10px 12px;
+      background: #fff4f0;
+      border-left: 3px solid var(--coral);
+      border-radius: 0 7px 7px 0;
+    }
+
+    .modal-actions {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-top: 16px;
+    }
+
+    .toast {
+      position: fixed;
+      z-index: 80;
+      left: 50%;
+      bottom: 20px;
+      max-width: calc(100% - 30px);
+      padding: 10px 14px;
+      color: #fff;
+      font-size: 12px;
+      font-weight: 750;
+      background: #315f59;
+      border-radius: 999px;
+      transform: translateX(-50%);
+      box-shadow: 0 10px 24px rgba(49, 95, 89, 0.22);
+      animation: toastIn 180ms ease both;
+    }
+
+    .footer-note {
+      width: min(1280px, calc(100% - 28px));
+      margin: 0 auto 24px;
+      color: #778b87;
+      font-size: 10px;
+      line-height: 1.6;
+      text-align: center;
+    }
+
+    @keyframes reveal {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes screenIn {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @keyframes modalIn {
+      from { opacity: 0; transform: translateY(10px) scale(0.985); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    @keyframes toastIn {
+      from { opacity: 0; transform: translate(-50%, 8px); }
+      to { opacity: 1; transform: translate(-50%, 0); }
+    }
+
+    @media (max-width: 1040px) {
+      .layout {
+        grid-template-columns: 210px minmax(0, 1fr);
+      }
+
+      .notes {
+        position: static;
+        grid-column: 1 / -1;
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 10px;
+      }
+
+      .notes .rail-copy,
+      .notes .note-title {
+        margin-bottom: 0;
+      }
+    }
+
+    @media (max-width: 760px) {
+      .shell {
+        width: calc(100% - 20px);
+        margin-top: 10px;
+      }
+
+      .topbar {
+        padding: 12px;
+        align-items: flex-start;
+      }
+
+      .demo-pill {
+        display: none;
+      }
+
+      .brand-sub {
+        font-size: 9px;
+      }
+
+      .layout {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 11px;
+      }
+
+      .rail,
+      .notes {
+        position: static;
+      }
+
+      .rail {
+        padding: 13px;
+      }
+
+      .rail-title,
+      .rail-copy,
+      .progress {
+        display: none;
+      }
+
+      .rail-actions {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        margin-top: 0;
+        padding-top: 0;
+        border-top: 0;
+      }
+
+      .notes {
+        display: none;
+      }
+
+      .app {
+        min-height: 640px;
+        border-radius: 12px;
+      }
+
+      .app-head {
+        min-height: 65px;
+        padding: 15px 15px 12px;
+      }
+
+      .app-title {
+        font-size: 17px;
+      }
+
+      .context-pill {
+        display: none;
+      }
+
+      .screen {
+        padding: 19px 15px 23px;
+      }
+
+      .home-title {
+        font-size: 30px;
+      }
+
+      .scenario-grid,
+      .mode-grid,
+      .form-grid,
+      .tone-panel,
+      .connect-grid,
+      .role-grid {
+        grid-template-columns: minmax(0, 1fr);
+      }
+
+      .scenario-card {
+        min-height: 148px;
+      }
+
+      .mode-head {
+        display: grid;
+      }
+
+      .bubble {
+        max-width: 94%;
+      }
+
+      .chat-compose {
+        grid-template-columns: minmax(0, 1fr);
+      }
+
+      .chat-compose .primary-button {
+        width: 100%;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="shell">
+    <header class="topbar">
+      <div class="brand">
+        <span class="brand-mark" aria-hidden="true"></span>
+        <div>
+          <h1 class="brand-title">连小理·引桥</h1>
+          <div class="brand-sub">全体本科生 · 情绪支持与沟通演练</div>
+        </div>
+      </div>
+      <div class="top-actions">
+        <span class="demo-pill">本地体验版 · 内置情景逻辑</span>
+        <button class="danger-button" type="button" data-action="open-safety">
+          <span id="safetyIcon"></span>
+          真人支持
+        </button>
+      </div>
+    </header>
+
+    <main class="layout">
+      <aside class="rail">
+        <p class="eyebrow">从这里开始</p>
+        <h2 class="rail-title">先选一件事，再决定想怎么处理。</h2>
+        <p class="rail-copy">不替你发送消息，也不假装成为你的朋友。所有选择都可以撤回和重来。</p>
+        <ol class="progress" id="progress"></ol>
+        <div class="rail-actions">
+          <button class="soft-button" type="button" data-action="go-home">
+            <span id="homeIcon"></span>
+            重新开始
+          </button>
+          <button class="ghost-button" type="button" data-action="open-safety">
+            <span id="railSafetyIcon"></span>
+            安全支持
+          </button>
+        </div>
+      </aside>
+
+      <section class="app" aria-live="polite">
+        <header class="app-head">
+          <div>
+            <p class="app-kicker" id="appKicker">场景选择</p>
+            <h2 class="app-title" id="appTitle">今天想从哪件事开始？</h2>
+          </div>
+          <span class="context-pill" id="contextPill">第 1 步 / 共 3 步</span>
+        </header>
+        <div class="screen" id="screen"></div>
+      </section>
+
+      <aside class="notes">
+        <section>
+          <p class="eyebrow">体验规则</p>
+          <h2 class="note-title">最后一个按键，永远留给你。</h2>
+          <p class="note-copy">引桥只整理、陪练和生成草稿，不自动发送，也不把原始聊天用于匹配。</p>
+        </section>
+        <section>
+          <p class="eyebrow">两种边界</p>
+          <h2 class="note-title">不诊断，也不替代真人。</h2>
+          <p class="note-copy">高风险信号出现时，停止普通演练，转向可信任的人、学校支持和紧急服务。</p>
+        </section>
+        <section>
+          <p class="eyebrow">一句话</p>
+          <h2 class="note-title">让情绪落地，让表达成形。</h2>
+          <p class="note-copy">适用宿舍沟通、找搭子、失恋、竞赛失利和升学就业压力。</p>
+        </section>
+      </aside>
+    </main>
+  </div>
+
+  <p class="footer-note">连小理·引桥｜连小理の造梦队｜本地交互体验版，不连接真实匹配池或危机干预服务。</p>
+  <div id="modalRoot"></div>
+  <div id="toastRoot" aria-live="assertive"></div>
+
+  <script>
+    const icons = {
+      heart: '<path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8l1.1 1.1L12 21l7.8-7.5 1.1-1.1a5.5 5.5 0 0 0-.1-7.8Z"/>',
+      message: '<path d="M7.5 18H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2h-5l-3 3v-3Z"/><path d="M8 7h8"/><path d="M8 11h5"/>',
+      users: '<path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>',
+      home: '<path d="m3 11 9-8 9 8"/><path d="M5 10v10h14V10"/><path d="M9 20v-6h6v6"/>',
+      shield: '<path d="M20 13c0 5-3.5 7.5-8 9-4.5-1.5-8-4-8-9V5l8-3 8 3v8Z"/><path d="m9 12 2 2 4-4"/>',
+      moon: '<path d="M21 12.8A8.5 8.5 0 1 1 11.2 3 6.6 6.6 0 0 0 21 12.8Z"/>',
+      book: '<path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20V4H6.5A2.5 2.5 0 0 0 4 6.5v13Z"/><path d="M4 19.5V21h16v-4"/>',
+      trophy: '<path d="M8 21h8"/><path d="M12 17v4"/><path d="M7 4h10v5a5 5 0 0 1-10 0V4Z"/><path d="M7 6H4v2a3 3 0 0 0 3 3"/><path d="M17 6h3v2a3 3 0 0 1-3 3"/>',
+      coffee: '<path d="M4 8h12v6a5 5 0 0 1-5 5H9a5 5 0 0 1-5-5V8Z"/><path d="M16 10h2a3 3 0 0 1 0 6h-2"/><path d="M6 3v2"/><path d="M10 3v2"/><path d="M14 3v2"/>',
+      arrow: '<path d="M5 12h14"/><path d="m13 6 6 6-6 6"/>',
+      back: '<path d="m15 18-6-6 6-6"/>',
+      send: '<path d="m22 2-7 20-4-9-9-4 20-7Z"/><path d="M22 2 11 13"/>',
+      copy: '<rect width="14" height="14" x="8" y="8" rx="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/>',
+      check: '<path d="m20 6-11 11-5-5"/>',
+      x: '<path d="M18 6 6 18"/><path d="m6 6 12 12"/>',
+      compass: '<circle cx="12" cy="12" r="9"/><path d="m15.5 8.5-2.2 4.8-4.8 2.2 2.2-4.8 4.8-2.2Z"/>'
+    };
+
+    const scenarios = {
+      roommate: {
+        label: "室友沟通",
+        tag: "宿舍 · 住校生活",
+        icon: "moon",
+        cardCopy: "作息、声音或生活习惯影响你，想说又怕关系变僵。",
+        prompt: "室友半夜还在打游戏，键盘声很大。我睡不着，但怕说了以后关系变僵。",
+        facts: "十一点后键盘声持续，我难以入睡。",
+        feeling: "烦躁、犹豫，也担心破坏关系。",
+        need: "希望晚上十一点后能安静，也不想指责对方。",
+        boundary: "不用“自私”评价对方，不替双方猜动机。",
+        reply: "你不是只在为噪音难受，还在同时维护宿舍关系。这两种顾虑可以同时存在，不需要先证明谁对谁错。",
+        drafts: [
+          ["稳定表达", "想和你说一件事：十一点后键盘声比较明显，我最近比较难入睡。能不能在十一点后戴耳机或轻一点？如果时间上不方便，我们也可以一起想个办法。"],
+          ["柔和协商", "我这几天睡得比较浅，十一点后的键盘声会把我吵醒。你愿意在晚上十一点后戴耳机吗？我也想先听听你的情况。"],
+          ["清楚说明", "十一点后宿舍需要安静，我需要按时睡觉。请你戴耳机或降低音量；如果做不到，我们一起商量替代方案。"]
+        ],
+        invite: "周三晚 19:30 一起去操场走 30 分钟，不聊矛盾，先换换空气。时间不合适也没关系。"
+      },
+      buddy: {
+        label: "找搭子",
+        tag: "连接 · 缺少倾诉",
+        icon: "users",
+        cardCopy: "想运动、吃饭或散步，却不敢在群里开口，也怕没人回应。",
+        prompt: "想找人一起打羽毛球，但群里没人认识。我担心发出去没人回应，会很尴尬。",
+        facts: "我想找人一起打球，但还没有发出邀请。",
+        feeling: "期待认识人，也害怕冷场。",
+        need: "先发出一个具体、低压、可以撤回的邀请。",
+        boundary: "不公开身份和聊天记录，不一次承诺长期关系。",
+        reply: "你想找的未必是“很多朋友”，可能只是一个具体的共同活动。把邀请缩小到时间、地点和时长，反而更容易开始。",
+        drafts: [
+          ["开放活动", "想约几位同学周三 19:00 去操场打羽毛球，大约 40 分钟，水平不限。时间合适再回复，不合适也完全没关系。"],
+          ["一对一试约", "我想周三或周五晚上去操场打羽毛球，想找一个人一起练。先从 40 分钟开始，节奏合适再约下一次。"],
+          ["群聊低压", "新人求带：周三 19:00 操场羽毛球，目标是不尴尬地接住三个球。有人一起吗？"]
+        ],
+        invite: "喜欢羽毛球，想找一两位同学周三 19:00 去操场，约 40 分钟。只有双方确认后才互相可见。"
+      },
+      exam: {
+        label: "考研与学业压力",
+        tag: "学业 · 未来选择",
+        icon: "book",
+        cardCopy: "复习看不到尽头、绩点焦虑，或不知道该向谁说自己撑不住。",
+        prompt: "考研复习总是赶不上计划，我一坐下来就焦虑，又不敢跟别人说自己状态不好。",
+        facts: "计划经常完不成，坐下后容易焦虑，暂时没有告诉别人。",
+        feeling: "紧张、自责，也害怕让别人失望。",
+        need: "把巨大的压力拆成今天能完成的一小步，并决定是否向一位可信任的人说明状态。",
+        boundary: "不把一次计划未完成等同于能力不足，也不用“必须上岸”吓自己。",
+        reply: "现在压着你的不只是任务量，还有“不能失败”的解释。我们先把今天变成可完成的一小步，再决定是否需要让人知道。",
+        drafts: [
+          ["照顾状态", "我最近复习压力比较大，状态不太稳定。今晚我想先和你说十分钟，不需要立刻给建议，只想有人听一下。"],
+          ["清楚求助", "我想找个人帮我分担一下复习节奏。你方便的时候，能听我说十分钟并帮我看看下一步吗？"],
+          ["给自己", "今天我不追求全部完成，只完成一个最重要的章节和一次复盘。做完就结束，不继续加码。"]
+        ],
+        invite: "今晚 21:30 以后一起散步 20 分钟，不谈进度，只说说最近的状态。你方便再回复。"
+      },
+      breakup: {
+        label: "失恋与关系受挫",
+        tag: "关系 · 情绪陪伴",
+        icon: "heart",
+        cardCopy: "分手、暧昧受挫或友情变化，让你反复想联系、自责或什么都不想说。",
+        prompt: "分手之后我总是想联系对方，也怀疑是不是自己不够好。朋友劝我放下，但我做不到。",
+        facts: "关系已经结束，我仍然想联系对方，朋友们建议我放下。",
+        feeling: "难受、反复、自我怀疑，也害怕别人觉得我矫情。",
+        need: "先确认自己的难过，不急着证明自己已经走出来，也不在冲动时替自己发送消息。",
+        boundary: "不把关系结束等同于个人价值下降，不鼓励追问或挽回，也不承诺让对方回头。",
+        reply: "难过不是没放下，也不是不够坚强。现在更重要的是让情绪先有地方放，而不是逼自己马上做决定。",
+        drafts: [
+          ["需要陪伴", "我现在因为分手很难受。我不需要你劝我马上放下，只想有人陪我聊十分钟，可以吗？"],
+          ["先不发送", "我很想联系对方，但我知道现在情绪很满。先请你陪我把想说的话写下来，不立刻发出去。"],
+          ["给朋友", "如果我这几天反复提这件事，可能是还没缓过来。你不用解决，只要告诉我你还在听就好。"]
+        ],
+        invite: "今晚或明天找个安静的地方一起散步 30 分钟，只听我讲，不催我做决定。"
+      },
+      competition: {
+        label: "竞赛与比赛失利",
+        tag: "成长 · 挫败恢复",
+        icon: "trophy",
+        cardCopy: "投入很多却没获奖，不想面对队友、导师，也怀疑自己的能力。",
+        prompt: "比赛准备了大半年却没有获奖。我不知道怎么面对队友和老师，也开始怀疑自己是不是能力不行。",
+        facts: "投入较长时间，最终没有获奖，还需要面对队友或老师。",
+        feeling: "失落、羞愧、疲惫，也担心别人评价。",
+        need: "先把“结果失利”和“个人价值”分开，再决定如何回应团队和下一步安排。",
+        boundary: "不把一次比赛结果等同于能力或价值，也不假装完全不在意。",
+        reply: "投入越真实，失落越难绕开。现在先不急着复盘，也不急着证明自己没事，我们先接住这份挫败。",
+        drafts: [
+          ["给队友", "这次结果我挺失落的。先谢谢大家一起坚持到这里，我想休息一两天，再一起复盘。你们有时间吗？"],
+          ["给老师", "这次没有达到预期，我需要一点时间消化。等状态稳定后，我想向您请教这次最值得保留和调整的部分。"],
+          ["给自己", "这次没有获奖，但它不能单独定义我的能力。今天先允许自己停下来，明天只做一次简短复盘。"]
+        ],
+        invite: "想找一位队友吃饭或散步 30 分钟，不急着复盘，先互相说说现在的感受。"
+      }
+    };
+
+    const scenarioQuickReplies = {
+      roommate: ["怎么说才不像指责", "对方拒绝怎么办", "我真正需要的可能是什么"],
+      buddy: ["想找学习搭子但怕被拒绝", "想找人吃饭但不敢开口", "有人拒绝后怎么不否定自己"],
+      exam: ["帮我把压力拆成今天一步", "怎么向朋友求助", "我怕告诉别人"],
+      breakup: ["先不联系对方", "怎么跟朋友说我难受", "我真正需要的可能是什么"],
+      competition: ["怎么和队友说", "今天先不复盘", "我怕别人觉得我没用"]
+    };
+
+    const state = {
+      screen: "home",
+      scenario: null,
+      chat: [],
+      selectedDraft: 0,
+      tones: {
+        direct: 3,
+        warmth: 4,
+        humor: 2
+      },
+      practiceFields: {},
+      role: "accept",
+      quickReplies: [],
+      lastBuddy: null,
+      tags: new Set(["散步", "工作日晚上", "公开地点"]),
+      connectType: "兴趣搭子",
+      consent: true,
+      invitation: ""
+    };
+
+    const screen = document.getElementById("screen");
+    const progress = document.getElementById("progress");
+    const appKicker = document.getElementById("appKicker");
+    const appTitle = document.getElementById("appTitle");
+    const contextPill = document.getElementById("contextPill");
+    const modalRoot = document.getElementById("modalRoot");
+    const toastRoot = document.getElementById("toastRoot");
+
+    document.getElementById("safetyIcon").innerHTML = icon("shield", "btn-icon");
+    document.getElementById("railSafetyIcon").innerHTML = icon("shield", "btn-icon");
+    document.getElementById("homeIcon").innerHTML = icon("home", "btn-icon");
+
+    function icon(name, className = "btn-icon") {
+      return `<svg class="${className}" viewBox="0 0 24 24" aria-hidden="true">${icons[name] || ""}</svg>`;
+    }
+
+    function escapeHtml(value) {
+      return String(value)
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;")
+        .replaceAll("'", "&#039;");
+    }
+
+    const stepConfig = {
+      home: 1,
+      modes: 2,
+      listen: 2,
+      practice: 2,
+      connect: 2
+    };
+
+    function renderChrome() {
+      const step = stepConfig[state.screen] || 1;
+      const labels = ["选择真实场景", "选择支持方式", "完成一次行动"];
+      progress.innerHTML = labels.map((label, index) => `
+        <li class="${index + 1 === step ? "active" : ""}">${label}</li>
+      `).join("");
+
+      contextPill.textContent = `第 ${step} 步 / 共 3 步`;
+      if (state.screen === "home") {
+        appKicker.textContent = "场景选择";
+        appTitle.textContent = "今天想从哪件事开始？";
+      } else if (state.screen === "modes") {
+        appKicker.textContent = scenarios[state.scenario].label;
+        appTitle.textContent = "你想先被听见，还是先准备行动？";
+      } else if (state.screen === "listen") {
+        appKicker.textContent = `${scenarios[state.scenario].label} · 听见我`;
+        appTitle.textContent = "先把这团感受放在这里";
+      } else if (state.screen === "practice") {
+        appKicker.textContent = `${scenarios[state.scenario].label} · 陪我练`;
+        appTitle.textContent = "把想说的，练到更像自己";
+      } else {
+        appKicker.textContent = `${scenarios[state.scenario].label} · 帮我连接`;
+        appTitle.textContent = "先确认边界，再发出低压邀请";
+      }
+    }
+
+    function render() {
+      renderChrome();
+      const renderers = {
+        home: renderHome,
+        modes: renderModes,
+        listen: renderListen,
+        practice: renderPractice,
+        connect: renderConnect
+      };
+      screen.innerHTML = (renderers[state.screen] || renderHome)();
+      bindInputs();
+    }
+
+    function renderHome() {
+      return `
+        <div class="home-intro">
+          <h2 class="home-title">不用一次说得很完整，先从一件<strong>真实发生的事</strong>开始。</h2>
+          <p class="home-copy">引桥适用于全体本科生。你可以先整理情绪，也可以练习沟通，或在同意后寻找低压连接。</p>
+          <span class="data-note">常见困扰：找搭子、缺少倾诉对象和宿舍压力。</span>
+        </div>
+        <div class="scenario-grid">
+          ${Object.entries(scenarios).map(([key, item]) => `
+            <button class="scenario-card" type="button" data-scenario="${key}">
+              <span class="scenario-icon">${icon(item.icon, "scenario-icon-svg")}</span>
+              <h3 class="scenario-label">${escapeHtml(item.label)}</h3>
+              <p class="scenario-copy">${escapeHtml(item.cardCopy)}</p>
+              <span class="scenario-tag">${escapeHtml(item.tag)}</span>
+            </button>
+          `).join("")}
+        </div>
+      `;
+    }
+
+    function renderModes() {
+      const item = scenarios[state.scenario];
+      return `
+        <div class="mode-head">
+          <div>
+            <h2 class="mode-title">${escapeHtml(item.label)}</h2>
+            <p class="mode-copy">你现在不需要一次解决所有问题。选择一个最接近当下需要的出口，之后随时可以换。</p>
+          </div>
+          <button class="back-link" type="button" data-action="go-home">${icon("back")}换一件事</button>
+        </div>
+        <div class="mode-grid">
+          <button class="mode-card" type="button" data-mode="listen">
+            <span class="mode-number">出口 01</span>
+            <h3 class="mode-name">听见我</h3>
+            <p class="mode-text">先让情绪降落，分清事实、猜测和真正需要。不诊断，也不逼你马上行动。</p>
+            <span class="mode-link">先陪我一会儿 ${icon("arrow")}</span>
+          </button>
+          <button class="mode-card" type="button" data-mode="practice">
+            <span class="mode-number">出口 02</span>
+            <h3 class="mode-name">陪我练</h3>
+            <p class="mode-text">把话拆清楚，比较不同语气，并提前练习接受、追问、拒绝或误解。</p>
+            <span class="mode-link">开始沟通演练 ${icon("arrow")}</span>
+          </button>
+          <button class="mode-card" type="button" data-mode="connect">
+            <span class="mode-number">出口 03</span>
+            <h3 class="mode-name">帮我连接</h3>
+            <p class="mode-text">只使用你确认过的标签，生成低压邀请或真人求助第一句话。</p>
+            <span class="mode-link">生成一条邀请 ${icon("arrow")}</span>
+          </button>
+        </div>
+      `;
+    }
+
+    function renderListen() {
+      const item = scenarios[state.scenario];
+      const initialChat = state.chat.length
+        ? state.chat
+        : [
+            { role: "user", text: item.prompt },
+            { role: "agent", text: item.reply }
+          ];
+      state.chat = initialChat;
+      if (!state.quickReplies.length) {
+        state.quickReplies = scenarioQuickReplies[state.scenario] || ["继续陪我梳理", "我真正需要的可能是什么"];
+      }
+
+      return `
+        <div class="mode-head">
+          <div>
+            <h2 class="mode-title">你不需要先证明自己值得被听见。</h2>
+            <p class="mode-copy">可以继续打字，也可以只选择一个方向。引桥会先回应感受，不替你定义对错。</p>
+          </div>
+          <button class="back-link" type="button" data-action="go-modes">${icon("back")}换一种方式</button>
+        </div>
+        <div class="chat">
+          ${state.chat.map(message => `
+            <div class="bubble ${message.role}">${escapeHtml(message.text)}</div>
+          `).join("")}
+        </div>
+        <form class="chat-compose" data-form="listen">
+          <input id="chatInput" type="text" autocomplete="off" placeholder="把现在最想说的一句写下来">
+          <button class="primary-button teal" type="submit">${icon("send")}发送</button>
+        </form>
+        <div class="quick-row">
+          ${state.quickReplies.map(reply => `
+            <button class="chip" type="button" data-suggest="${escapeHtml(reply)}">${escapeHtml(reply)}</button>
+          `).join("")}
+          <button class="chip" type="button" data-action="give-action">给我一个小行动</button>
+          <button class="chip" type="button" data-mode="practice">换成沟通演练</button>
+          <button class="chip" type="button" data-mode="connect">想找人支持</button>
+        </div>
+      `;
+    }
+
+    function getPracticeFields() {
+      const item = scenarios[state.scenario];
+      if (!state.practiceFields[state.scenario]) {
+        state.practiceFields[state.scenario] = {
+          facts: item.facts,
+          feeling: item.feeling,
+          need: item.need,
+          boundary: item.boundary
+        };
+      }
+      return state.practiceFields[state.scenario];
+    }
+
+    function applyTone(text) {
+      const { direct, warmth, humor } = state.tones;
+      let result = text.trim();
+      if (warmth >= 4) result = `谢谢你愿意听我说。${result}`;
+      if (direct >= 4) result = `我想直接说清楚：${result}`;
+      if (humor >= 4) result = `${result}先试一次，不合适再调整。`;
+      return result;
+    }
+
+    function getPracticeDrafts() {
+      return scenarios[state.scenario].drafts.map(([tag, text]) => [tag, applyTone(text)]);
+    }
+
+    function renderPractice() {
+      const item = scenarios[state.scenario];
+      const fields = getPracticeFields();
+      const drafts = getPracticeDrafts();
+      const activeDraft = drafts[state.selectedDraft] || drafts[0];
+      const roleText = {
+        accept: "对方可能接受并协商。接下来确认一个具体时间和做法。",
+        question: "追问不等于拒绝。先补充可观察的事实，不必证明自己有资格提出需要。",
+        reject: "对方拒绝这个方案，不代表你的感受不重要。可以退回边界和替代方案。",
+        misunderstand: "先停止争论“谁对谁错”，回到事实、影响和一个明确请求。"
+      };
+
+      return `
+        <div class="mode-head">
+          <div>
+            <h2 class="mode-title">把“发生了什么”和“我猜到了什么”分开。</h2>
+            <p class="mode-copy">先整理四件事，再生成说法。你可以直接修改任何内容。</p>
+          </div>
+          <button class="back-link" type="button" data-action="go-modes">${icon("back")}换一种方式</button>
+        </div>
+        <div class="form-grid">
+          <label class="field"><span>客观事实</span><textarea data-field="facts">${escapeHtml(fields.facts)}</textarea></label>
+          <label class="field"><span>我的感受</span><textarea data-field="feeling">${escapeHtml(fields.feeling)}</textarea></label>
+          <label class="field"><span>真正需要</span><textarea data-field="need">${escapeHtml(fields.need)}</textarea></label>
+          <label class="field"><span>边界与不提法</span><textarea data-field="boundary">${escapeHtml(fields.boundary)}</textarea></label>
+        </div>
+        <div class="tone-panel">
+          <label class="tone-field">
+            <span>直接程度 <output data-tone-output="direct">${state.tones.direct}</output></span>
+            <input type="range" min="1" max="5" value="${state.tones.direct}" data-tone="direct">
+          </label>
+          <label class="tone-field">
+            <span>温和程度 <output data-tone-output="warmth">${state.tones.warmth}</output></span>
+            <input type="range" min="1" max="5" value="${state.tones.warmth}" data-tone="warmth">
+          </label>
+          <label class="tone-field">
+            <span>幽默程度 <output data-tone-output="humor">${state.tones.humor}</output></span>
+            <input type="range" min="1" max="5" value="${state.tones.humor}" data-tone="humor">
+          </label>
+        </div>
+        <div class="quick-row" style="margin-top:10px">
+          <span class="note-block warm" style="flex:1">语气可以变化，事实、需要和边界不能丢。</span>
+        </div>
+        <div class="draft-list">
+          ${drafts.map((draft, index) => `
+            <button class="draft ${index === state.selectedDraft ? "active" : ""}" type="button" data-draft="${index}">
+              <span class="draft-tag">${escapeHtml(draft[0])}</span>
+              ${escapeHtml(draft[1])}
+            </button>
+          `).join("")}
+        </div>
+        <div class="result-block">
+          <h3>角色互换剧场</h3>
+          <p>提前练一遍可能发生的反应，不需要预测对方一定怎么想。</p>
+          <div class="role-grid">
+            ${[
+              ["accept", "接受", "愿意协商"],
+              ["question", "追问", "想了解原因"],
+              ["reject", "拒绝", "不接受方案"],
+              ["misunderstand", "误解", "听成了指责"]
+            ].map(([key, title, tip]) => `
+              <button class="role-card ${state.role === key ? "active" : ""}" type="button" data-role="${key}">
+                <strong>${title}</strong><span>${tip}</span>
+              </button>
+            `).join("")}
+          </div>
+          <div class="note-block" style="margin-top:11px">${roleText[state.role]}</div>
+        </div>
+        <div class="action-card">
+          <span class="draft-tag">最终行动卡</span>
+          <textarea id="finalDraft">${escapeHtml(activeDraft[1])}</textarea>
+          <div class="quick-row">
+            <button class="primary-button teal" type="button" data-action="copy-draft">${icon("copy")}复制这条说法</button>
+            <button class="ghost-button" type="button" data-action="save-session">${icon("check")}保存到本机</button>
+          </div>
+        </div>
+      `;
+    }
+
+    function renderConnect() {
+      const tags = ["散步", "运动", "吃饭", "学习", "看展", "工作日晚上", "周末白天", "公开地点"];
+      const types = ["兴趣搭子", "倾诉陪伴", "真人支持"];
+      return `
+        <div class="mode-head">
+          <div>
+            <h2 class="mode-title">不是“找一个人”，而是发出一个可以接受的邀请。</h2>
+            <p class="mode-copy">只使用你确认过的标签。体验版不会真正连接其他人，也不会展示聊天原文。</p>
+          </div>
+          <button class="back-link" type="button" data-action="go-modes">${icon("back")}换一种方式</button>
+        </div>
+        <div class="connect-grid">
+          <section class="connect-panel">
+            <h3>我想要的是</h3>
+            <div class="quick-row">
+              ${types.map(type => `
+                <button class="chip ${state.connectType === type ? "active" : ""}" type="button" data-connect-type="${type}">
+                  ${type}
+                </button>
+              `).join("")}
+            </div>
+            <h3 style="margin-top:17px">可公开标签</h3>
+            <div class="quick-row">
+              ${tags.map(tag => `
+                <button class="chip ${state.tags.has(tag) ? "active" : ""}" type="button" data-tag="${tag}">
+                  ${tag}
+                </button>
+              `).join("")}
+            </div>
+            <label class="consent">
+              <input id="consent" type="checkbox" ${state.consent ? "checked" : ""}>
+              <span>我同意只使用以上标签生成邀请；原始聊天和身份信息不进入匹配。</span>
+            </label>
+            <div class="quick-row">
+              <button class="primary-button blue" type="button" data-action="generate-invite">
+                ${icon("compass")}生成低压邀请
+              </button>
+            </div>
+          </section>
+          <section class="invite-card ${state.invitation ? "" : "empty"}" id="invitePreview">
+            ${state.invitation ? `
+              <span class="invite-label">READY TO REVIEW</span>
+              <h3>${escapeHtml(state.connectType)}</h3>
+              <p>${escapeHtml(state.invitation)}</p>
+              <p style="margin-top:10px">公开标签：${escapeHtml([...state.tags].join("、") || "未选择")}</p>
+              <span class="privacy-stamp">双方确认后才可见 · 可撤回</span>
+              <div class="quick-row" style="margin-top:12px">
+                <button class="primary-button blue" type="button" data-action="copy-invite">${icon("copy")}复制邀请</button>
+              </div>
+            ` : `
+              <div>
+                <span class="invite-label">INVITATION PREVIEW</span>
+                <h3 style="margin-top:10px">邀请会先出现在这里</h3>
+                <p>你确认前不会发布；体验版也不会连接真实账号。</p>
+              </div>
+            `}
+          </section>
+        </div>
+      `;
+    }
+
+    function bindInputs() {
+      const listenForm = screen.querySelector('[data-form="listen"]');
+      if (listenForm) {
+        listenForm.addEventListener("submit", event => {
+          event.preventDefault();
+          const input = document.getElementById("chatInput");
+          const text = input.value.trim();
+          if (!text) return;
+          handleUserMessage(text);
+        });
+      }
+
+      const finalDraft = document.getElementById("finalDraft");
+      const draftButtons = screen.querySelectorAll("[data-draft]");
+      if (finalDraft && draftButtons.length) {
+        draftButtons.forEach(button => {
+          button.addEventListener("click", () => {
+            state.selectedDraft = Number(button.dataset.draft);
+            finalDraft.value = getPracticeDrafts()[state.selectedDraft][1];
+            render();
+          });
+        });
+      }
+
+      const consent = document.getElementById("consent");
+      if (consent) {
+        consent.addEventListener("change", () => {
+          state.consent = consent.checked;
+        });
+      }
+
+    }
+
+    function refreshDraftButtons() {
+      const draftList = screen.querySelector(".draft-list");
+      if (!draftList) return;
+      const drafts = getPracticeDrafts();
+      draftList.innerHTML = drafts.map((draft, index) => `
+        <button class="draft ${index === state.selectedDraft ? "active" : ""}" type="button" data-draft="${index}">
+          <span class="draft-tag">${escapeHtml(draft[0])}</span>
+          ${escapeHtml(draft[1])}
+        </button>
+      `).join("");
+    }
+
+    function refreshFinalDraft() {
+      const finalDraft = document.getElementById("finalDraft");
+      if (!finalDraft) return;
+      const drafts = getPracticeDrafts();
+      finalDraft.value = (drafts[state.selectedDraft] || drafts[0])[1];
+    }
+
+    function handleUserMessage(text) {
+      if (containsRisk(text)) {
+        openSafety();
+        return;
+      }
+      state.chat.push({ role: "user", text });
+      const reply = generateReply(text);
+      state.chat.push({ role: "agent", text: reply });
+      render();
+    }
+
+    function containsRisk(text) {
+      return /(不想活|活不下去|自杀|轻生|结束生命|伤害自己|伤害他|杀人)/.test(text);
+    }
+
+    function detectBuddyActivity(text) {
+      const patterns = [
+        [/(学习|自习|图书馆|复习|刷题|英语|编程|代码|考研搭子)/, "学习"],
+        [/(吃饭|食堂|午饭|晚饭|火锅|探店|饭搭子)/, "吃饭"],
+        [/(运动|跑步|操场|健身|羽毛球|篮球|足球|网球|乒乓球)/, "运动"],
+        [/(游戏|开黑|手游|端游|电竞)/, "游戏"],
+        [/(看展|电影|音乐|演出|话剧|展览)/, "看展"],
+        [/(散步|走走|citywalk|逛校园)/, "散步"],
+        [/(拼车|打车|机场|高铁|车站)/, "拼车"],
+        [/(拼单|团购|快递|外卖)/, "拼单"],
+        [/(聊天|倾诉|说话|陪我说)/, "倾诉陪伴"]
+      ];
+      const match = patterns.find(([pattern]) => pattern.test(text));
+      return match ? match[1] : null;
+    }
+
+    function detectBuddyBarrier(text) {
+      if (/(被拒|拒绝|拒我|怕.*拒)/.test(text)) return "担心拒绝";
+      if (/(没人回|不回|冷场|没人理)/.test(text)) return "担心没人回应";
+      if (/(尴尬|社恐|不好意思|不敢开口|怕打扰)/.test(text)) return "担心尴尬或打扰";
+      if (/(不熟|不认识|没话题)/.test(text)) return "担心彼此不熟";
+      return null;
+    }
+
+    function buildBuddyInvite(activity) {
+      const invites = {
+        "学习": "我周三或周五 19:00 想去图书馆学习 90 分钟，想找个人一起去，各自学各自的也可以。时间合适再回复，不合适也完全没关系",
+        "吃饭": "我想找个晚饭搭子，周四 18:00 去食堂吃饭，大约 40 分钟。只是想轻松吃个饭，时间合适再回复",
+        "运动": "想找一位同学周三 19:00 去操场运动 40 分钟，水平不限。时间合适再回复，不合适也没关系",
+        "游戏": "想找人周末一起开黑两局，时间可以再商量。只是轻松玩一会儿，不合适也没关系",
+        "看展": "想找人周末一起去看一个展，逛 1 小时左右，可以先在公共地点碰面。时间合适再回复",
+        "散步": "想找个人晚饭后一起散步 30 分钟，不一定要一直聊天。你方便再回复",
+        "拼车": "我某天需要去车站，想问问有没有同路的同学一起拼车。时间确定后再决定，不合适也没关系",
+        "拼单": "我想拼一个快递或团购单，想问问有没有人一起。先确认需求，再决定是否加入",
+        "倾诉陪伴": "我最近有些事想找人听我讲十分钟，不需要建议，也不用帮我解决。你方便时再回复，不方便也没关系"
+      };
+      return invites[activity] || "我想找个人一起做一件具体的小事，时间大约 30 到 60 分钟，不合适也没关系";
+    }
+
+    function generateBuddyReply(text) {
+      const activity = detectBuddyActivity(text);
+      const barrier = detectBuddyBarrier(text);
+      if (activity || barrier) {
+        state.lastBuddy = {
+          activity: activity || state.lastBuddy?.activity || "一起做点事情",
+          barrier: barrier || state.lastBuddy?.barrier || "担心被拒绝"
+        };
+      }
+
+      const current = state.lastBuddy || {
+        activity: "一起做点事情",
+        barrier: "担心被拒绝"
+      };
+      const invite = buildBuddyInvite(current.activity);
+
+      if (/(生成|写.*邀约|怎么约|邀请语)/.test(text)) {
+        state.quickReplies = ["我怕被拒绝", "被拒绝后怎么不否定自己", "换一种更轻松的邀约"];
+        return `可以先用这个低压版本：${invite}。重点是给出时间、时长和“不合适也没关系”，让对方容易回答，也让你不需要一次承担太多期待。`;
+      }
+
+      if (/(被拒绝后|接受拒绝|拒绝.*否定自己)/.test(text)) {
+        state.quickReplies = [`生成${current.activity}邀约`, "我怕没人回应", "换去陪我练"];
+        return "被拒绝容易让人马上理解成“我不受欢迎”，但它也可能只是时间不合、需求不同或对方当下没有精力。可以把目标改成：我完成一次低承诺邀请，就算练习成功；对方是否答应，不用于给自己打分。";
+      }
+
+      if (/怎么让对方更容易拒绝/.test(text)) {
+        state.quickReplies = [`生成${current.activity}邀约`, "被拒绝后怎么不否定自己", "换去陪我练"];
+        return "给对方一个明确的拒绝入口：“时间不合适也没关系”“不回复也可以”。这不是故作客气，而是在传递：这次邀请不要求对方必须答应，也不代表答应后就必须长期联系。";
+      }
+
+      if (/不熟时先聊什么/.test(text)) {
+        state.quickReplies = [`生成${current.activity}邀约`, "我怕被拒绝", "换去陪我练"];
+        return `不熟时先聊活动本身，不用一上来交换很多个人信息。例如：“你平时${current.activity}多久一次？”“我一般在晚上有空，你呢？”聊完具体安排后，如果对方没有继续话题，也可以自然停下。`;
+      }
+
+      if (barrier === "担心拒绝" || /怕被拒绝/.test(text)) {
+        state.quickReplies = [`生成${current.activity}邀约`, "被拒绝后怎么不否定自己", "教我降低被拒绝的感觉"];
+        return `你想找的是“${current.activity}搭子”，真正卡住你的更像是主动邀请后可能被拒绝。这个担心很具体，可以先设计一个不要求关系、不要求长时间陪伴的邀请：${invite}。拒绝不等于你不值得被回应，只说明这次时间和需求没对上。`;
+      }
+
+      if (barrier === "担心没人回应") {
+        state.quickReplies = [`生成${current.activity}邀约`, "我怕被拒绝", "没人回应时怎么办"];
+        return `你担心的是发出去以后没有回应，那种沉默确实比明确拒绝更难受。可以把邀请写成一个对方容易回答、也允许不回复的版本：${invite}。发出去以后，不立刻把“没人回”解释成“没人喜欢我”。`;
+      }
+
+      if (barrier === "担心尴尬或打扰") {
+        state.quickReplies = [`生成${current.activity}邀约`, "怎么让对方更容易拒绝", "换去陪我练"];
+        return `你担心的是主动会带来尴尬，也怕给别人添麻烦。那就把“建立关系”改成“共同完成一件小事”：${invite}。对方可以直接拒绝，你也有明确的退出方式，这样压力会低很多。`;
+      }
+
+      if (barrier === "担心彼此不熟") {
+        state.quickReplies = [`生成${current.activity}邀约`, "不熟时先聊什么", "换去陪我练"];
+        return `不熟不等于不能一起做事，反而适合从具体活动开始，不需要先成为朋友。你可以这样约：${invite}。先有一次共同经历，再决定要不要继续联系。`;
+      }
+
+      state.quickReplies = [`生成${current.activity}邀约`, "我怕被拒绝", "我怕没人回应"];
+      return `你并不是泛泛地想“认识人”，而是想找一个可以一起${current.activity}的同伴，同时担心主动后会被拒绝。可以把目标缩小成一次低承诺邀请：${invite}。先让连接有一个具体、可撤回的入口。`;
+    }
+
+    function generateReply(text) {
+      if (state.scenario === "buddy" || /(搭子|一起学习|一起吃饭|一起运动|一起玩|找人一起)/.test(text)) {
+        return generateBuddyReply(text);
+      }
+      if (/怎么说才不像指责/.test(text)) {
+        state.quickReplies = ["对方拒绝怎么办", "换成沟通演练", "我真正需要的可能是什么"];
+        return "不指责的关键，是只说可观察到的行为、对你的影响和具体请求。例如：“十一点后键盘声比较明显，我很难入睡，能不能戴耳机或声音小一点？”不要替对方解释成“你根本不在乎我”。";
+      }
+      if (/对方拒绝怎么办/.test(text)) {
+        state.quickReplies = ["换去陪我练", "我真正需要的可能是什么"];
+        return "对方拒绝一个具体方案，不等于否定你的感受。可以先把“关系评价”拿开，只处理方案：“那我理解。我们能不能一起找一个其他办法？”如果对方仍然拒绝，你也有权保护自己的休息和生活边界。";
+      }
+      if (/帮我把压力拆成今天一步/.test(text)) {
+        state.quickReplies = ["怎么向朋友求助", "我怕告诉别人", "换成沟通演练"];
+        return "今天只做三件事：选出最影响你的一个任务，限定30分钟完成最小版本，然后写一句复盘。不要用“今天必须全部赶上”作为完成标准。";
+      }
+      if (/怎么向朋友求助|怎么跟朋友说我难受/.test(text)) {
+        state.quickReplies = ["我怕告诉别人", "帮我写一句求助的话", "换去陪我练"];
+        return "先降低对方的责任：“我最近状态有点满，想和你说十分钟。你不用解决，也不用给建议，只要听我说完就好。”明确时长和不需要解决什么问题，会让双方压力都更低。";
+      }
+      if (/帮我写一句求助的话/.test(text)) {
+        state.quickReplies = ["我怕告诉别人", "换去陪我练"];
+        return "可以直接发：“我最近状态不太好，想找你说十分钟。你不用给建议，只要听我说完就好。你现在方便吗？”把时间、需求和“不方便也可以”说清楚。";
+      }
+      if (/我怕告诉别人|我怕别人觉得我没用/.test(text)) {
+        state.quickReplies = ["怎么向朋友求助", "我真正需要的可能是什么", "换成沟通演练"];
+        return "你担心的是被评价，而不只是开不了口。可以先找一个最不容易评价你的人，用“只想被听十分钟”的方式开始，不把一次求助变成公开自己的全部状态。";
+      }
+      if (/先不联系对方/.test(text)) {
+        state.quickReplies = ["怎么跟朋友说我难受", "我真正需要的可能是什么"];
+        return "可以先给自己设一个短时间窗口，比如今晚先不发送任何消息。把想说的话写在草稿里，明天再看是否需要修改。这个动作是在保护你，不是强迫你马上放下。";
+      }
+      if (/今天先不复盘/.test(text)) {
+        state.quickReplies = ["怎么和队友说", "我怕别人觉得我没用"];
+        return "可以。复盘不是必须在最失落的时候完成。今天先允许自己停下来，等情绪稍微下降后，再只复盘一个最值得保留和一个最值得调整的点。";
+      }
+      if (/怎么和队友说/.test(text)) {
+        state.quickReplies = ["今天先不复盘", "换成沟通演练", "我怕别人觉得我没用"];
+        return "可以这样说：“这次结果我挺失落的。先谢谢大家一起坚持到这里，我想休息一两天，再约一个时间做简短复盘。”表达情绪不等于指责队友，也不要求你假装没事。";
+      }
+      if (/我真正需要的可能是什么/.test(text)) {
+        const needs = {
+          roommate: "你的需要可能同时包括：一个可持续的休息环境、一个不带指责的沟通机会，以及不让关系立刻破裂的空间。",
+          exam: "你的需要可能不是“立刻学完”，而是可执行的学习节奏、对未来不确定感的支持，以及有人知道你现在很吃力。",
+          breakup: "你的需要可能是先被允许难受、减少冲动联系，以及重新把注意力放回自己的生活，而不是马上决定该不该挽回。",
+          competition: "你的需要可能是承认投入、消化失落、恢复自我评价，并决定怎样和团队继续相处。"
+        };
+        state.quickReplies = ["换成沟通演练", "给我一个小行动"];
+        return needs[state.scenario] || "你的需要可能包括被理解、获得具体帮助，以及在行动前保留自主决定权。";
+      }
+      if (/(分手|失恋|喜欢的人)/.test(text)) {
+        return "关系结束时，难受和想联系对方可以同时存在。现在先不急着判断自己是不是“没出息”，我们先帮你把这股冲动放到一个不会立刻伤害你的地方。";
+      }
+      if (/(考研|考试|绩点|复习|求职|找工作)/.test(text)) {
+        return "听起来不是单纯任务太多，而是完成不了时会立刻怀疑自己。我们先不解决整条路，只看今天最小的一步，以及是否需要让一个人知道你的状态。";
+      }
+      if (/(比赛|竞赛|没获奖|失败)/.test(text)) {
+        return "投入越多，结果落空时越难只说一句“没关系”。你可以暂时不复盘、不立刻振作，我们先分清这次结果和你个人价值。";
+      }
+      if (/(室友|宿舍|打游戏|作息)/.test(text)) {
+        return "你同时在意自己的睡眠和关系，并不矛盾。下一次回应时，我会帮你把可观察的事实和一个具体请求分开。";
+      }
+      if (/(没人|孤独|搭子|朋友|群聊)/.test(text)) {
+        return "想连接别人，同时又怕没人回应，是很真实的拉扯。可以先不看“会不会交到朋友”，只设计一个对方容易回答、你也能撤回的邀请。";
+      }
+      return "我先确认一下：你现在更需要被听见、需要别人给一点帮助，还是想先练一遍怎么说？不用马上决定，也可以继续把刚才那句话讲完整。";
+    }
+
+    function generateInvite() {
+      const item = scenarios[state.scenario];
+      if (!state.consent) {
+        toast("请先确认标签使用范围。");
+        return;
+      }
+      if (state.connectType === "兴趣搭子") {
+        const activityInvites = {
+          "学习": "我周三或周五 19:00 想去图书馆学习 90 分钟，想找个人一起去，各自学各自的也可以。时间合适再回复，不合适也完全没关系。",
+          "运动": "想找一位同学周三 19:00 去操场运动 40 分钟，水平不限。时间合适再回复，不合适也没关系。",
+          "吃饭": "我想找个晚饭搭子，周四 18:00 去食堂吃饭，大约 40 分钟。只是想轻松吃个饭，时间合适再回复。",
+          "散步": "想找个人晚饭后一起散步 30 分钟，不一定要一直聊天。你方便再回复，不方便也没关系。",
+          "看展": "想找人周末一起去看一个展，逛 1 小时左右，可以先在公共地点碰面。时间合适再回复。"
+        };
+        const selectedActivity = ["学习", "运动", "吃饭", "散步", "看展"].find(tag => state.tags.has(tag));
+        state.invitation = activityInvites[selectedActivity] || item.invite;
+      } else if (state.connectType === "倾诉陪伴") {
+        state.invitation = "我最近状态有点满，想找个人陪我说十分钟。你不用给建议，也不用负责解决。你方便时再回复，不方便也没关系。";
+      } else {
+        state.invitation = "我想找人帮我把现在的情况理一理。可以先听我说五分钟，再告诉我下一步应该联系谁吗？如果不合适，也请直接告诉我。";
+      }
+      render();
+      toast("已生成邀请草稿，确认前不会发送。");
+    }
+
+    function copyFinalDraft() {
+      const value = document.getElementById("finalDraft")?.value || "";
+      if (!value) return;
+      navigator.clipboard?.writeText(value)
+        .then(() => toast("已复制到剪贴板。"))
+        .catch(() => toast("当前浏览器未允许复制。"));
+    }
+
+    function copyInvite() {
+      if (!state.invitation) {
+        toast("请先生成邀请。");
+        return;
+      }
+      navigator.clipboard?.writeText(state.invitation)
+        .then(() => toast("邀请已复制到剪贴板。"))
+        .catch(() => toast("当前浏览器未允许复制。"));
+    }
+
+    function saveSession() {
+      const payload = {
+        scenario: state.scenario,
+        selectedDraft: state.selectedDraft,
+        tones: state.tones,
+        practiceFields: getPracticeFields(),
+        invitation: state.invitation
+      };
+      try {
+        localStorage.setItem("yin-qiao-session", JSON.stringify(payload));
+        toast("已保存到本机，下次仍可继续。");
+      } catch {
+        toast("当前浏览器未允许保存到本机。");
+      }
+    }
+
+    function showAction() {
+      state.chat.push({
+        role: "agent",
+        text: "先做一件十分钟内能完成的小事：写下现在最影响你的一个问题，再决定是否需要找一个人说。不是逼自己解决，只是让压力有一个落点。"
+      });
+      render();
+    }
+
+    function openSafety() {
+      modalRoot.innerHTML = `
+        <div class="modal-backdrop" role="presentation">
+          <section class="modal" role="dialog" aria-modal="true" aria-labelledby="securityTitle">
+            <h2 id="securityTitle">先让真人进入这段对话</h2>
+            <p>如果有伤害自己或他人的念头，请停止普通演练。下面的体验版不会自动联系任何人，也不会替代专业帮助。</p>
+            <ul>
+              <li>先离开危险物品或危险环境，去有人、明亮、可以求助的公共空间，尽量不要独处。</li>
+              <li>联系一位可信任的人，直接说：“我现在不安全，需要你马上陪我。”不必先解释完整。</li>
+              <li>联系学校官方心理支持、辅导员、校医院；紧急危险时拨打 110 或 120。</li>
+            </ul>
+            <div class="modal-actions">
+              <button class="danger-button" type="button" data-action="close-safety">${icon("check")}我在安全环境中</button>
+              <button class="ghost-button" type="button" data-action="go-home">回到入口</button>
+            </div>
+          </section>
+        </div>
+      `;
+      bindModalEvents();
+    }
+
+    function bindModalEvents() {
+      modalRoot.querySelectorAll("[data-action]").forEach(button => {
+        button.addEventListener("click", () => {
+          if (button.dataset.action === "close-safety") modalRoot.innerHTML = "";
+          if (button.dataset.action === "go-home") {
+            modalRoot.innerHTML = "";
+            state.screen = "home";
+            state.scenario = null;
+            state.chat = [];
+            render();
+          }
+        });
+      });
+    }
+
+    function toast(message) {
+      toastRoot.innerHTML = `<div class="toast">${escapeHtml(message)}</div>`;
+      clearTimeout(toast.timer);
+      toast.timer = setTimeout(() => {
+        toastRoot.innerHTML = "";
+      }, 2400);
+    }
+
+    document.addEventListener("click", event => {
+      const scenarioButton = event.target.closest("[data-scenario]");
+      if (scenarioButton) {
+        state.scenario = scenarioButton.dataset.scenario;
+        state.chat = [];
+        state.quickReplies = [];
+        state.lastBuddy = null;
+        state.selectedDraft = 0;
+        state.invitation = "";
+        state.screen = "modes";
+        render();
+        return;
+      }
+
+      const modeButton = event.target.closest("[data-mode]");
+      if (modeButton) {
+        state.screen = modeButton.dataset.mode;
+        render();
+        return;
+      }
+
+      const roleButton = event.target.closest("[data-role]");
+      if (roleButton) {
+        state.role = roleButton.dataset.role;
+        render();
+        return;
+      }
+
+      const draftButton = event.target.closest("[data-draft]");
+      if (draftButton) {
+        state.selectedDraft = Number(draftButton.dataset.draft);
+        render();
+        return;
+      }
+
+      const tagButton = event.target.closest("[data-tag]");
+      if (tagButton) {
+        const tag = tagButton.dataset.tag;
+        if (state.tags.has(tag)) state.tags.delete(tag);
+        else state.tags.add(tag);
+        render();
+        return;
+      }
+
+      const typeButton = event.target.closest("[data-connect-type]");
+      if (typeButton) {
+        state.connectType = typeButton.dataset.connectType;
+        state.invitation = "";
+        render();
+        return;
+      }
+
+      const suggestionButton = event.target.closest("[data-suggest]");
+      if (suggestionButton) {
+        const suggestion = suggestionButton.dataset.suggest;
+        if (suggestion === "换去陪我练" || suggestion === "换成沟通演练") {
+          state.screen = "practice";
+          render();
+          return;
+        }
+        handleUserMessage(suggestion);
+        return;
+      }
+
+      const actionButton = event.target.closest("[data-action]");
+      if (!actionButton) return;
+
+      const action = actionButton.dataset.action;
+      if (action === "go-home") {
+        state.screen = "home";
+        state.scenario = null;
+        state.chat = [];
+        state.invitation = "";
+        render();
+      }
+      if (action === "go-modes" && state.scenario) {
+        state.screen = "modes";
+        render();
+      }
+      if (action === "open-safety") openSafety();
+      if (action === "listen-continue") {
+        state.chat.push({
+          role: "agent",
+          text: "好，我们继续。你可以只说现在最难受的一点，不用整理成完整故事。我要帮你区分的是：哪些是已经发生的事实，哪些是你对自己的评价。"
+        });
+        render();
+      }
+      if (action === "give-action") showAction();
+      if (action === "copy-draft") copyFinalDraft();
+      if (action === "copy-invite") copyInvite();
+      if (action === "save-session") saveSession();
+      if (action === "generate-invite") generateInvite();
+    });
+
+    document.addEventListener("input", event => {
+      if (event.target.matches("[data-field]")) {
+        getPracticeFields()[event.target.dataset.field] = event.target.value;
+      }
+      if (event.target.matches("[data-tone]")) {
+        const key = event.target.dataset.tone;
+        state.tones[key] = Number(event.target.value);
+        const output = screen.querySelector(`[data-tone-output="${key}"]`);
+        if (output) output.textContent = event.target.value;
+        refreshDraftButtons();
+        refreshFinalDraft();
+      }
+    });
+
+    render();
+  </script>
+</body>
+</html>
